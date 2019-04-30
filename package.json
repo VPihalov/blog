@@ -1,23 +1,27 @@
 {
   "name": "blog",
   "version": "1.0.0",
-  "description": "",
+  "description": "description",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
+    "inspect": "node --inspect-brk server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "eslint": "^5.16.0",
     "nodemon": "^1.18.11",
-    "eslint": "^5.16.0"
+    "prettier": "^1.17.0"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
     "ejs": "^2.6.1",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "mongoose": "^5.5.4",
+    "nconf": "^0.10.0"
   },
   "engines": {
     "node": ">=6.0.0"
