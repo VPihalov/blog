@@ -5,11 +5,13 @@ const app = express();
 const config = require('./config');
 const path = require('path');
 const database = require('./db/database');
+const staticAsset = require('static-asset');  //хэширование скриптов и стилей, подключаемых в индекс
 
 global.dirProject = __dirname;
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(staticAsset(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, config.get('dirweb'))));
 app.use(
     '/javascripts',
