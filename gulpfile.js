@@ -4,6 +4,8 @@ const autoprefixer = require('gulp-autoprefixer');
 const cssnano = require('gulp-cssnano');
 // const browserSync = require('browser-sync');
 const plumber = require('gulp-plumber');
+const concat = require('gulp-concat');
+const uglify = require('gulp-uglifyjs');
 
 gulp.task('scss', () => {
     return (
@@ -22,6 +24,16 @@ gulp.task('scss', () => {
     );
 });
 
+gulp.task('scripts', () =>
+    gulp
+        .src([
+            'dev/js/auth.js'
+        ])
+        .pipe(concat('scripts.js'))  //объединяем скрипты массива в один скрипт с названием scripts.js
+        .pipe(uglify())   //сжимаем
+        .pipe(gulp.dest('public/javascripts'))  //выгружаем
+)
+
 // gulp.task('browser-sync', () => {
 //     browserSync({
 //         server: {
@@ -31,7 +43,8 @@ gulp.task('scss', () => {
 //     });
 // });
 
-gulp.task('default', gulp.series('scss'), () => {
+gulp.task('default', gulp.series('scss', 'scripts'), () => {
     gulp.watch('dev/scss/**/*.scss', gulp.series('scss'));
+    gulp.watch('dev/js/**/*.js', gulp.series('scripts'))
     // gulp.watch('dist/*.html', browserSync.reload);
 });

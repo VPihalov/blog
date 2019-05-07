@@ -24,9 +24,11 @@
   },
   "dependencies": {
     "body-parser": "^1.19.0",
-    "dotenv": "^7.0.0",
+    "dotenv": "^8.0.0",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
+    "gulp-concat": "^2.6.1",
+    "gulp-uglifyjs": "^0.6.2",
     "jquery": "^3.4.1",
     "mongoose": "^5.5.4",
     "nconf": "^0.10.0",

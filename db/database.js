@@ -1,6 +1,7 @@
-const config = require("../config/index");
+const config = require("../config");
 const mongoose = require("mongoose");
-const env_db_config = process.env.NODE_ENV || "test";
+const env_db_config = process.env.NODE_ENV || "develop";
+console.log(`env_db_config `, config.get(`MONGO_URL`));
 
 module.exports = () => {
   return new Promise((resolve, reject) => {
@@ -14,6 +15,6 @@ module.exports = () => {
       )
       .once("open", () => resolve(mongoose.connection));
 
-    mongoose.connect(config.get("MONGO_URL"), { useNewUrlParser: true });
+    mongoose.connect(config.get(`db:connection:${env_db_config}:MONGO_URL`), { useNewUrlParser: true });
   });
 };

@@ -26,7 +26,7 @@ app.get("/", (req, res) => {
 
 
 database().then(info => {
-  console.log(`\x1b[34;1;40mConnected to Datebase ${info.host}:${info.port}/${info.name}!\x1b[34;1;40m`);
+  console.log(`\x1b[34;1;40mConnected to Datebase ${info.host}:${info.port}/${info.name} with process.env.NODE_ENV: ${process.env.NODE_ENV }!\x1b[34;1;40m`);
   app.listen(config.get('port'), () => {
       console.log(`\x1b[34mServer started on port:\x1b[0m \x1b[1;34m${config.get('port')}!\x1b[0m`);
       console.log(`process.env: ${process.env}`);

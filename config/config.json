@@ -1,5 +1,14 @@
 {
   "port": "3000",
   "dirweb": "public/",
-  "MONGO_URL": "mongodb://localhost:27017/blog"
+  "MONGO_URL": "mongodb://localhost:27017/blog",
+  "db": {
+      "client": "",
+      "login": "",
+      "connection": {
+          "develop": {
+              "MONGO_URL": "mongodb://localhost:27017/blog"
+          }
+      }
+  }
 }
