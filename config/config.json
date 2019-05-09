@@ -3,8 +3,8 @@
   "dirweb": "public/",
   "MONGO_URL": "mongodb://localhost:27017/blog",
   "db": {
-      "client": "",
-      "login": "",
+      "client": "1",
+      "login": "2",
       "connection": {
           "develop": {
               "MONGO_URL": "mongodb://localhost:27017/blog"

@@ -1,0 +1,12 @@
+{
+  "comment_ignore": "папки, которые nodemon будет игнорировать",
+  "ignore": ["node_modules", "dev", "public"],
+  "comment2_env": "перезаписываем переменные окружения при запуске nodemon",
+  "env": {
+    "NODE_ENV": "develop",
+    "PORT": 3000,
+    "MONGO_URL": "mongodb://localhost/blog"
+  },
+  "ext": ".js,.json",
+  "watch": "./"
+}
