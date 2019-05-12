@@ -13,7 +13,11 @@ $(function () {
             $('.register').hide()
         }
     });
-
+    //clear error border
+    $('input').on('focus', function (e) {
+        $('p.error').remove();
+        $('input').removeClass('error')
+    })
 });
 
 //register
@@ -24,17 +28,25 @@ $('.register-button').on('click', function (e) {
         password: $('#register-password').val(),
         passwordConfirm: $('#register-password-confirm').val()
     };
-    console.log("data", data);
     $.ajax({
         type: 'POST',
         data: JSON.stringify(data),
-        contentType: 'application.json',
-        url: '/api/auth/register',
-        crossDomain: true,
-        xhrFields: {withCredentials: true},
-        header: 'Access-Control-Allow-Origin: *'
+        contentType: 'application/json',
+        url: '/api/auth/register'
+        // crossDomain: true,
+        // xhrFields: {withCredentials: true},
+        // header: 'Access-Control-Allow-Origin: *'
     }).done(function (data) {
-        console.log("data", data)
+        if (!data.ok) {
+            $('.register h2').after('<p class="error">' + data.error + '</p>');
+            if (data.fields) {
+                data.fields.forEach(function (item) {
+                    $('input[name=' + item + ']').addClass('error')
+                })
+            }
+        } else {
+            $('.register h2').after('<p class="success">Регистрация прошла успешно</p>')
+        }
     })
 });
 
