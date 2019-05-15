@@ -3,6 +3,9 @@ $(function () {
     var flag = true;
     $('.switch-button').on('click', function(e) {
         e.preventDefault();
+
+        $('input').val('');
+
         if (flag) {
             flag = false;
             $('.register').show('slow');
@@ -38,6 +41,7 @@ $('.register-button').on('click', function (e) {
         // header: 'Access-Control-Allow-Origin: *'
     }).done(function (data) {
         if (!data.ok) {
+            $('p.error').remove();
             $('.register h2').after('<p class="error">' + data.error + '</p>');
             if (data.fields) {
                 data.fields.forEach(function (item) {

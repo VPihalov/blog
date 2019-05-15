@@ -11,24 +11,41 @@ router.post('/register', (req, res) => {
     const saltRounds = 5;
 
     if (!login || !password || !passwordConfirm) {
+        const fields = [];
+        if (!login) fields.push('login');
+        if (!password) fields.push('password');
+        if (!passwordConfirm) fields.push('passwordConfirm');
         res.json({
             ok: false,
             error: "Все поля должны быть заполнены",
-            fields: ['login', 'password', 'passwordConfirm'] //поля, которые необходимо подсветить красным
+            fields //поля, которые необходимо подсветить красным
         })
     } else if (login.length < 3 || login.length > 16) {
         res.json({
             ok: false,
             error: "Длина логина должна быть от 3 до 16 символов",
+            fields
+        })
+    } else if (!/^[a-zA-Z0-9]+$/.test(login)) {
+        res.json({
+            ok: false,
+            error: "Только латинские буквы и цифры",
             fields: ['login']
         })
     } else if (password != passwordConfirm){
         res.json({
             ok: false,
             error: "Пароли не совпадают",
+            fields
+        })
+    } else if (password.length < 5) {
+        res.json({
+            ok: false,
+            error: "Пароль должен быть не менее пяти символов",
             fields: ['password', 'passwordConfirm']
         })
-    } else {
+    }
+    else {
         bcrypt.hash(password, null, null, (err, hash) => {
             models.USER.create({
                 login: login,
