@@ -7,10 +7,25 @@ const path = require('path');
 const database = require('./db/database');
 const staticAsset = require('static-asset');  //хэширование скриптов и стилей, подключаемых в индекс
 const routes = require('./routes');
+const mongoose = require('mongoose');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 let isProduction = process.env.NODE_ENV === 'production';
 
-
 global.dirProject = __dirname;
+// global.session;
+
+//sessions (middleware)
+app.use(
+    session({
+        secret: config.get('SESSION_SECRET'),
+        resave: true,
+        saveUninitialized: false,
+        store: new MongoStore({
+            mongooseConnection: mongoose.connection
+        })
+    })
+);
 
 //sets and uses
 app.set("view engine", "ejs");
@@ -25,7 +40,15 @@ app.use(
 
 //routers
 app.get("/", (req, res) => {
-    res.render('index')
+    const id = req.session.userId;
+    const login = req.session.userLogin;
+
+    res.render('index', {
+        user: {
+            id,
+            login
+        }
+    })
 });
 app.use("/api/auth", routes.auth);
 

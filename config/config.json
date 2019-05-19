@@ -2,6 +2,7 @@
   "port": "3000",
   "dirweb": "public/",
   "MONGO_URL": "mongodb://localhost:27017/blog",
+  "SESSION_SECRET": "sdfdKSfSdfASsdfSfFGsdfA",
   "db": {
       "client": "1",
       "login": "2",
