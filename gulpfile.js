@@ -27,10 +27,12 @@ gulp.task('scss', () => {
 gulp.task('scripts', () =>
     gulp
         .src([
-            'dev/js/auth.js'
+            'dev/js/auth.js',
+            'dev/js/post.js',
+            'node_modules/medium-editor/dist/js/medium-editor.min.js'
         ])
         .pipe(concat('scripts.js'))  //объединяем скрипты массива в один скрипт с названием scripts.js
-        .pipe(uglify())   //сжимаем
+        // .pipe(uglify())   //сжимаем
         .pipe(gulp.dest('public/javascripts'))  //выгружаем
 )
 
