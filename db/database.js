@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const env_db_config = process.env.NODE_ENV || "develop";
 // console.log(`env_db_config `, env_db_config);
 let isProduction = process.env.NODE_ENV === 'production';
+const mocks = require('../mocks');
+
 
 module.exports = function () {
   return new Promise((resolve, reject) => {
@@ -14,8 +16,12 @@ module.exports = function () {
       .on("close", () =>
         console.log("\x1b[31mDatabase connection is closed\x1b[31m!")
       )
-      .once("open", () => resolve(mongoose.connection));
-    console.log(config.get("db:client"));
+      .once("open", () => {
+        resolve(mongoose.connection);
+        // mocks();
+      });
+      console.log(config.get("db:client"));
     mongoose.connect(config.get(`MONGO_URL`), { useNewUrlParser: true });
   });
 };
+

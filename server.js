@@ -6,6 +6,7 @@ const config = require('./config');
 const path = require('path');
 const database = require('./db/database');
 const staticAsset = require('static-asset');  //хэширование скриптов и стилей, подключаемых в индекс
+const mocks = require('./mocks');
 const routes = require('./routes');
 const mongoose = require('mongoose');
 const session = require('express-session');

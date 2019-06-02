@@ -1,13 +1,16 @@
 $(function () {
-
+    //remove errors
+    function removeErrors() {
+            $('form.login p.error, form.register p.error').remove();
+            $('form.login input, form.register input').removeClass('error')
+    }
     //toggle
     var flag = true;
     $('.switch-button').on('click', function(e) {
         e.preventDefault();
 
         $('input').val('');
-        $('p.error').remove();
-        $('input').removeClass('error');
+        removeErrors();
 
         if (flag) {
             flag = false;
@@ -19,17 +22,16 @@ $(function () {
             $('.register').hide()
         }
     });
+
     //clear error border
-    $('input').on('focus', function (e) {
-        $('p.error').remove();
-        $('input').removeClass('error')
+    $('form.login input, form.register input').on('focus', function (e) {
+        removeErrors()
     });
 
     //register
     $('.register-button').on('click', function (e) {
         e.preventDefault();
-        $('p.error').remove();
-        $('input').removeClass('error');
+        removeErrors();
 
         var data = {
             login: $('#register-login').val(),
@@ -63,8 +65,7 @@ $(function () {
     //login
     $('.login-button').on('click', function (e) {
         e.preventDefault();
-        $('p.error').remove();
-        $('input').removeClass('error');
+        removeErrors();
 
         var data = {
             login: $('#login-login').val(),
