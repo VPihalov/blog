@@ -11,5 +11,6 @@
               "MONGO_URL": "mongodb://localhost:27017/blog"
           }
       }
-  }
+  },
+  "PER_PAGE": 3
 }
