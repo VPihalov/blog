@@ -16,7 +16,7 @@ const schema = new Schema({
 });
 
 schema.set("toJSON", {
-    virtuals: true   //in ordet approach to the id without _id
-})
+    virtuals: true   //in order to approach to the id without _id
+});
 
 module.exports = mongoose.model('USER', schema);
